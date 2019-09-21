@@ -1,0 +1,56 @@
+service: cloud-analytics
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "sns:*"
+# Athena permissions        
+#        - "athena:*"
+#        - "s3:*"
+#        - "glue:*"
+      Resource:
+        - "*"
+# When you uncomment vpc please make sure lambda has access to internet: https://medium.com/@philippholly/aws-lambda-enable-outgoing-internet-access-within-vpc-8dd250e11e12  
+#  vpc:
+#    securityGroupIds:
+#     - sg-12345678901234567 # Your DB and Redis security groups here
+#    subnetIds:
+#     - subnet-12345678901234567 # Put here subnet with access to your DB, Redis and internet. For internet access 0.0.0.0/0 should be routed through NAT only for this subnet!
+  environment:
+    CUBEJS_DB_HOST: <YOUR_DB_HOST_HERE>
+    CUBEJS_DB_NAME: <YOUR_DB_NAME_HERE>
+    CUBEJS_DB_USER: <YOUR_DB_USER_HERE>
+    CUBEJS_DB_PASS: <YOUR_DB_PASS_HERE>
+    CUBEJS_DB_PORT: <YOUR_DB_PORT_HERE>
+    REDIS_URL: <YOUR_REDIS_URL_HERE>
+    CUBEJS_DB_TYPE: athena
+    CUBEJS_API_SECRET: b94d0de493680c9a022e3e6e7a96115c45c7669688941f491bff4f601e40f412f94dd1f2c164bf2e918860cffc9b1ae8d2d545bb1a31ed5e4a53546317be0b89
+    CUBEJS_APP: "${self:service.name}-${self:provider.stage}"
+    NODE_ENV: "${self:provider.stage}"
+    AWS_ACCOUNT_ID:
+      Fn::Join:
+        - ""
+        - - Ref: "AWS::AccountId"
+
+functions:
+  cubejs:
+    handler: cube.api
+    timeout: 30
+    events:
+      - http:
+          path: /
+          method: GET
+      - http:
+          path: /{proxy+}
+          method: ANY
+  cubejsProcess:
+    handler: cube.process
+    timeout: 630
+    events:
+      - sns: "${self:service.name}-${self:provider.stage}-process"
+
+plugins:
+  - serverless-express
