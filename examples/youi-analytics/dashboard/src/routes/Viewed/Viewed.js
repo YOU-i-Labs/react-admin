@@ -21,7 +21,12 @@ const queryMovie = {
 };
 
 const ViewedList = () => {
-    return <QueryExecutor queryString={queryMovie} chartType={NivoBarChart} />;
+    return (
+        <div>
+            <h2>Movie Viewership</h2>
+            <QueryExecutor queryString={queryMovie} chartType={NivoBarChart} />
+        </div>
+    );
 };
 
 export default ViewedList;
