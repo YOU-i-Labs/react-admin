@@ -2,17 +2,19 @@ import React from 'react';
 import QueryExecutor from '../../components/QueryExecutor/QueryExecutor';
 import NivoBarChart from '../../components/Charts/BarChart/NivoBarChart'
 
+
+
 const queryMovie = {
-    measures: ['Rawtemp.count'],
+    measures: ['Sessions.count'],
     timeDimensions: [],
-    dimensions: ['Rawtemp.title'],
+    dimensions: ['Sessions.title'],
     filters: [
         {
-            dimension: 'Rawtemp.title',
+            dimension: 'Sessions.title',
             operator: 'set',
         },
         {
-            dimension: 'Rawtemp.eventtype',
+            dimension: 'Sessions.eventtype',
             operator: 'equals',
             values: ['playStart'],
         },
