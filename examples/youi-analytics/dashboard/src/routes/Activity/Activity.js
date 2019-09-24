@@ -5,15 +5,15 @@ import NivoPieChart from '../../components/Charts/PieChart/NivoPieChart'
 
 const queryDevice = {
   "measures": [
-    "Rawtemp.count"
+    "Sessions.count"
   ],
   "timeDimensions": [],
   "dimensions": [
-    "Rawtemp.device"
+    "Sessions.manufacturemodel"
   ],
   "filters": [
     {
-      "dimension": "Rawtemp.device",
+      "dimension": "Sessions.manufacturemodel",
       "operator": "set"
     }
   ]
