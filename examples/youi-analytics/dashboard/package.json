@@ -5,11 +5,11 @@
   "dependencies": {
     "@cubejs-client/core": "^0.10.16",
     "@cubejs-client/react": "^0.10.16",
+    "@material-ui/core": "^4.4.3",
     "@nivo/bar": "^0.59.2",
     "@nivo/pie": "^0.59.1",
-    "antd": "^3.23.3",
     "aws-amplify": "^1.1.40",
-    "google-map-react": "^1.1.4",
+    "google-map-react": "^1.1.5",
     "ra-data-fakerest": "^2.6.0",
     "ra-language-french": "^2.9.3",
     "ra-tree-language-english": "^2.3.0",
@@ -19,7 +19,7 @@
     "react-admin": "^2.9.6",
     "react-dom": "^16.9.0",
     "react-google-charts": "^3.0.15",
-    "react-scripts": "^3.1.1"
+    "react-scripts": "^3.1.2"
   },
   "scripts": {
     "start": "react-scripts start",

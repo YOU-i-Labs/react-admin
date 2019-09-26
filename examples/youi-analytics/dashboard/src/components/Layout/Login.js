@@ -167,11 +167,11 @@ const enhance = compose(
             return errors;
         },
     }),
+    withStyles(styles),
     connect(
         mapStateToProps,
         { userLogin }
-    ),
-    withStyles(styles)
+    )
 );
 
 const EnhancedLogin = enhance(Login);

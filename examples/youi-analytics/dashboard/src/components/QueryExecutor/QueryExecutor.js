@@ -1,7 +1,7 @@
 import React from 'react';
 import { QueryRenderer } from '@cubejs-client/react';
 import cubejs from '@cubejs-client/core';
-import { Spin } from 'antd';
+import { CircularProgress } from '@material-ui/core';
 
 const API_URL = 'http://localhost:4000';
 const cubejsApi = cubejs(
@@ -13,7 +13,7 @@ const cubejsApi = cubejs(
 
 const renderChart = Component => ({ resultSet, error }) =>
     (resultSet && <Component resultSet={resultSet} />) ||
-    (error && error.toString()) || <Spin />;
+    (error && error.toString()) || <CircularProgress color="secondary" />;
 
 const QueryExecutor = ({ queryString, chartType }) => (
     <QueryRenderer
