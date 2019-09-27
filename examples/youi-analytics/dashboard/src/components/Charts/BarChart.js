@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ResponsiveBar } from '@nivo/bar'
 import useDimensions from "react-use-dimensions";
 
-const NivoBarChart = ({ resultSet }) => {
+const BarChart = ({ resultSet }) => {
     const dimensionKey = resultSet.loadResponse.query.dimensions[0]
     const measureKey = resultSet.loadResponse.query.measures[0]
     const dimensionTitle = resultSet.loadResponse.annotation.dimensions[dimensionKey].shortTitle
@@ -74,7 +74,7 @@ const NivoBarChart = ({ resultSet }) => {
     )
 }
 
-export default NivoBarChart
+export default BarChart
 
 
 // onMouseEnter={(data, event) => {

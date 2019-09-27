@@ -1,13 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Paper } from '@material-ui/core';
-import QueryExecutor from '../../components/QueryExecutor/QueryExecutor';
-import NivoPieChart from '../../components/Charts/PieChart/NivoPieChart'
-import NivoBarChart from '../../components/Charts/BarChart/NivoBarChart'
-import CardIcon from './CardIcon';
+import PieChart from '../../components/Charts/PieChart'
+import BarChart from '../../components/Charts/BarChart'
+import CardIcon from '../../components/MaterialUI/CardIcon';
 import MovieIcon from '@material-ui/icons/Movie';
-import MovieTwoToneIcon from '@material-ui/icons/MovieTwoTone'
 import AirplayIcon from '@material-ui/icons/Airplay';
+import QueryExecutor from '../../components/QueryExecutor/QueryExecutor';
+import * as Constants from '../../components/DataQuery/Queries'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -20,40 +20,6 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const queryDevice = {
-    "measures": [
-        "Sessions.count"
-    ],
-    "timeDimensions": [],
-    "dimensions": [
-        "Sessions.manufacturemodel"
-    ],
-    "filters": [
-        {
-            "dimension": "Sessions.manufacturemodel",
-            "operator": "set"
-        }
-    ]
-}
-
-const queryMovie = {
-    measures: ['Sessions.count'],
-    timeDimensions: [],
-    dimensions: ['Sessions.title'],
-    filters: [
-        {
-            dimension: 'Sessions.title',
-            operator: 'set',
-        },
-        {
-            dimension: 'Sessions.eventtype',
-            operator: 'equals',
-            values: ['playStart'],
-        },
-    ],
-    limit: 10,
-};
-
 const HomeList = () => {
     const classes = useStyles();
     return (
@@ -64,7 +30,7 @@ const HomeList = () => {
                     <Paper className={classes.paper}>
                         <div>
                             <h2>Device Activity</h2>
-                            <QueryExecutor queryString={queryDevice} chartType={NivoPieChart} />
+                            <QueryExecutor queryString={Constants.queryDevice} chartType={PieChart} />
                         </div>
                     </Paper>
                 </Grid>
@@ -73,7 +39,7 @@ const HomeList = () => {
                     <Paper className={classes.paper}>
                         <div>
                             <h2>Movie Viewership</h2>
-                            <QueryExecutor queryString={queryMovie} chartType={NivoBarChart} />
+                            <QueryExecutor queryString={Constants.queryMovie} chartType={BarChart} />
                         </div>
                     </Paper>
                 </Grid>

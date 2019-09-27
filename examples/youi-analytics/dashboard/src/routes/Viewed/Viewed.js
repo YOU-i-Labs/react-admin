@@ -1,32 +1,13 @@
 import React from 'react';
 import QueryExecutor from '../../components/QueryExecutor/QueryExecutor';
-import NivoBarChart from '../../components/Charts/BarChart/NivoBarChart'
-
-
-
-const queryMovie = {
-    measures: ['Sessions.count'],
-    timeDimensions: [],
-    dimensions: ['Sessions.title'],
-    filters: [
-        {
-            dimension: 'Sessions.title',
-            operator: 'set',
-        },
-        {
-            dimension: 'Sessions.eventtype',
-            operator: 'equals',
-            values: ['playStart'],
-        },
-    ],
-    limit: 10,
-};
+import BarChart from '../../components/Charts/BarChart'
+import * as Constants from '../../components/DataQuery/Queries'
 
 const ViewedList = () => {
     return (
         <div>
             <h2>Movie Viewership</h2>
-            <QueryExecutor queryString={queryMovie} chartType={NivoBarChart} />
+            <QueryExecutor queryString={Constants.queryMovie} chartType={BarChart} />
         </div>
     );
 };

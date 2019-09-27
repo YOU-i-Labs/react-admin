@@ -1,47 +1,15 @@
 import React from 'react';
 import QueryExecutor from '../../components/QueryExecutor/QueryExecutor';
-import HeatMap from "../../components/Charts/HeatMap/HeatMap"
+import HeatMap from "../../components/Charts/HeatMap"
+import * as Constants from '../../components/DataQuery/Queries'
 
-
-const queryGeoLocation = {
-  "dimensions": [
-    "Rawtemp.latitude",
-    "Rawtemp.longitude"
-  ],
-  "timeDimensions": [],
-  "filters": [
-    {
-      "dimension": "Rawtemp.latitude",
-      "operator": "set"
-    },
-    {
-      "dimension": "Rawtemp.longitude",
-      "operator": "set"
-    },
-    {
-      "dimension": "Rawtemp.latitude",
-      "operator": "notContains",
-      "values": [
-        "null"
-      ]
-    },
-    {
-      "dimension": "Rawtemp.longitude",
-      "operator": "notContains",
-      "values": [
-        "null"
-      ]
-    }
-  ],
-  "measures": []
-}
 
 
 const LocationList = () => {
   return (
     <div>
       <h2>Geolocation</h2>
-      <QueryExecutor queryString={queryGeoLocation} chartType={HeatMap} />
+      <QueryExecutor queryString={Constants.queryGeoLocation} chartType={HeatMap} />
     </div>
   );
 };
