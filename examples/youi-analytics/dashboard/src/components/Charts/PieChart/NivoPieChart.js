@@ -1,8 +1,11 @@
 import React from "react";
 import { ResponsivePie } from '@nivo/pie'
+import useDimensions from "react-use-dimensions";
 
 
 const PieChart = ({ resultSet }) => {
+    const [chartRef, chartSize] = useDimensions();
+
     const dimensionKey = resultSet.loadResponse.query.dimensions[0]
     const measureKey = resultSet.loadResponse.query.measures[0]
     const dimensionTitle = resultSet.loadResponse.annotation.dimensions[dimensionKey].shortTitle
@@ -10,14 +13,15 @@ const PieChart = ({ resultSet }) => {
     const data = resultSet.loadResponse.data.map(obj => {
         return {
             'id': obj[dimensionKey],
-            'label': [dimensionTitle],
+            'label': obj[dimensionKey],
             'value': parseInt(obj[measureKey])
         }
     })
+
     const theme = {
         labels: {
             text: {
-                fontSize: 15
+                fontSize: 13
             }
         },
         tooltip: {
@@ -27,19 +31,43 @@ const PieChart = ({ resultSet }) => {
         }
     };
 
+    const legends = [
+        {
+            anchor: 'bottom',
+            direction: 'column',
+            translateX: 0,
+            translateY: 150,
+            itemWidth: 100,
+            itemHeight: 18,
+            symbolShape: 'circle',
+            effects: [
+                {
+                    on: 'hover',
+                    style: {
+                        itemTextColor: '#000'
+                    }
+                }
+            ]
+        }
+    ]
+
+    const legendMargin = { top: 10, right: 10, bottom: 150, left: 10 }
+    const labelMargin = { top: 30, right: 10, bottom: 10, left: 10 }
+
     return (
-        <div style={{ height: 300, width: '100%' }}>
+        <div ref={chartRef} style={{ height: 350, width: '100%' }}>
             <ResponsivePie
                 data={data}
-                margin={{ top: 20, right: 10, bottom: 10, left: 10 }}
+                margin={chartSize.width < 750 ? legendMargin : labelMargin}
                 sortByValue={true}
                 innerRadius={0.5}
                 padAngle={1}
                 cornerRadius={5}
                 colors={{ scheme: 'set2' }}
-                borderWidth={5}
+                borderWidth={3}
                 borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
-                radialLabelsSkipAngle={10}
+                enableRadialLabels={chartSize.width < 750 ? false : true}
+                radialLabelsSkipAngle={1}
                 radialLabelsTextXOffset={6}
                 radialLabelsTextColor="#333333"
                 radialLabelsLinkOffset={0}
@@ -49,12 +77,12 @@ const PieChart = ({ resultSet }) => {
                 radialLabelsLinkColor={{ from: 'color', modifiers: [] }}
                 slicesLabelsSkipAngle={10}
                 slicesLabelsTextColor="#333333"
-
                 tooltip={({ id, value, color }) => (
-                    <strong style={{ color }}>
+                    <strong style={{ color, fontSize:13 }}>
                         {id}: {value}
                     </strong>
                 )}
+                legends={chartSize.width < 750 ? legends : []}
                 animate={true}
                 motionStiffness={90}
                 motionDamping={15}

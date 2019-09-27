@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from 'react'
 import { ResponsiveBar } from '@nivo/bar'
-
+import useDimensions from "react-use-dimensions";
 
 const NivoBarChart = ({ resultSet }) => {
     const dimensionKey = resultSet.loadResponse.query.dimensions[0]
@@ -29,8 +29,11 @@ const NivoBarChart = ({ resultSet }) => {
         }
     };
 
+    const [chartRef, chartSize] = useDimensions();
+
+
     return (
-        <div style={{ height: 500, width: '100%' }}>
+        <div ref={chartRef} style={{ height: 350, width: '100%' }}>
             <ResponsiveBar
                 data={data}
                 layout="horizontal"
@@ -40,6 +43,7 @@ const NivoBarChart = ({ resultSet }) => {
                 padding={0.3}
                 colors={{ scheme: 'set3' }}
                 colorBy="index"
+                enableGridX={false}
                 enableGridY={false}
                 borderRadius={4}
                 borderWidth={1}
@@ -51,9 +55,11 @@ const NivoBarChart = ({ resultSet }) => {
                     tickPadding: 5,
                     tickRotation: 0
                 }}
-                enableGridX={true}
+                axisBottom={chartSize.width < 750 ? null : {
+                    tickPadding: 0,
+                }}
                 tooltip={({ id, value, color }) => (
-                    <strong style={{ color }}>
+                    <strong style={{ color, fontSize:13 }}>
                         {id}: {value}
                     </strong>
                 )}
@@ -69,3 +75,11 @@ const NivoBarChart = ({ resultSet }) => {
 }
 
 export default NivoBarChart
+
+
+// onMouseEnter={(data, event) => {
+//     console.log({ is: 'mouseenter', data, event })
+// }}
+// onMouseLeave={(_data, event) => {
+//     console.log({ is: 'onMouseLeave', data, event })
+// }}
