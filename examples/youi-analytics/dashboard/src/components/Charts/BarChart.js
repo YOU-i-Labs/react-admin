@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import { ResponsiveBar } from '@nivo/bar'
-import useDimensions from "react-use-dimensions";
+import useDimensions from 'react-use-dimensions'
+import Dialog from '../../components/MaterialUI/Dialog'
+
 
 const BarChart = ({ resultSet }) => {
+    // Chart Config
     const dimensionKey = resultSet.loadResponse.query.dimensions[0]
     const measureKey = resultSet.loadResponse.query.measures[0]
     const dimensionTitle = resultSet.loadResponse.annotation.dimensions[dimensionKey].shortTitle
     const measureTitle = resultSet.loadResponse.annotation.measures[measureKey].shortTitle
-
     const data = resultSet.loadResponse.data.map(obj => {
         return {
             [dimensionTitle]: obj[dimensionKey],
@@ -29,9 +31,25 @@ const BarChart = ({ resultSet }) => {
         }
     };
 
-    const [chartRef, chartSize] = useDimensions();
+    // React Hook to measure DOM nodes to be able to hide/show chart labels in response to browser width
+    const [chartRef, chartSize] = useDimensions()
 
+    // Modal Config to view details
+    const [open, setOpen] = React.useState(false)
+    const [selectedData, setSelectedData] = React.useState({})
+    const handleOpen = (data) => {
+        setSelectedData({
+            'title': data.indexValue, 
+            'value': data.value,
+            'color': data.color
+        })
+        setOpen(true)
+    }
+    const handleClose = () => {
+        setOpen(false)
+    };
 
+    // Render chart
     return (
         <div ref={chartRef} style={{ height: 350, width: '100%' }}>
             <ResponsiveBar
@@ -59,7 +77,7 @@ const BarChart = ({ resultSet }) => {
                     tickPadding: 0,
                 }}
                 tooltip={({ id, value, color }) => (
-                    <strong style={{ color, fontSize:13 }}>
+                    <strong style={{ color, fontSize: 13 }}>
                         {id}: {value}
                     </strong>
                 )}
@@ -69,17 +87,11 @@ const BarChart = ({ resultSet }) => {
                 motionStiffness={90}
                 motionDamping={15}
                 theme={theme}
+                onClick={handleOpen}
             />
+            <Dialog data={selectedData} open={open} onClose={handleClose} />
         </div>
     )
 }
 
 export default BarChart
-
-
-// onMouseEnter={(data, event) => {
-//     console.log({ is: 'mouseenter', data, event })
-// }}
-// onMouseLeave={(_data, event) => {
-//     console.log({ is: 'onMouseLeave', data, event })
-// }}
