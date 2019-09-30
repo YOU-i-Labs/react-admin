@@ -6,7 +6,7 @@ import BarChart from '../../components/Charts/BarChart'
 import CardIcon from '../../components/MaterialUI/CardIcon';
 import MovieIcon from '@material-ui/icons/Movie';
 import AirplayIcon from '@material-ui/icons/Airplay';
-import QueryExecutor from '../../components/QueryExecutor/QueryExecutor';
+import QueryExecutor from '../../components/DataQuery/QueryExecutor';
 import * as Constants from '../../components/DataQuery/Queries'
 
 const useStyles = makeStyles(theme => ({

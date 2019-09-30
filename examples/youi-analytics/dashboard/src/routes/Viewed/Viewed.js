@@ -1,5 +1,5 @@
 import React from 'react';
-import QueryExecutor from '../../components/QueryExecutor/QueryExecutor';
+import QueryExecutor from '../../components/DataQuery/QueryExecutor';
 import BarChart from '../../components/Charts/BarChart'
 import * as Constants from '../../components/DataQuery/Queries'
 
