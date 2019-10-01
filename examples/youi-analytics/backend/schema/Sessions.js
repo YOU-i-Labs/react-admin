@@ -1,5 +1,5 @@
 cube(`Sessions`, {
-  sql: `SELECT * FROM flattenedsessionrecords.raw`,
+  sql: `SELECT * FROM flattenedsessionrecords.sessionrecords`,
   
   joins: {
     
