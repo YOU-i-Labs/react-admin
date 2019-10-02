@@ -22,16 +22,18 @@ const styles = {
 };
 
 const HomeList = ({ props, classes, translate }) => (
-    <Grid spacing={16} container style={{ padding: '0 0em' }}>
-        <Card style={{ boxShadow: 'none' }}>
-            <Title title="Home" />
-            <CardContent>
-                <TextField source="id" />
-                <Typography variant="title" component="h2">
-                    Welcome
+    <div>
+        <Title title="Home" />
+        <Grid spacing={16} container style={{ padding: '0 0em' }}>
+
+            <Card style={{ boxShadow: 'none' }}>
+                <CardContent>
+                    <TextField source="id" />
+                    <Typography variant="title" component="h2">
+                        Welcome
                 </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                    Welcome to the Administration Console. That's like Justin
+                    <Typography className={classes.pos} color="textSecondary">
+                        Welcome to the Administration Console. That's like Justin
                     Trudeau winning the Grey Cup. I'm personally a big fan of
                     Oscar Peterson eh. They’re the head coach and chief punk on
                     that Flin Flon team. Sign it to Bachman-Turner Overdrive, my
@@ -39,20 +41,20 @@ const HomeList = ({ props, classes, translate }) => (
                     and Norm MacDonald anymore. Watch your step and remember,
                     Bob and Doug MacKenzie. Take off eh.
                 </Typography>
-            </CardContent>
-            <CardActions style={{ justifyContent: 'flex-end' }}>
-                <Button size="small">Learn More</Button>
-            </CardActions>
-        </Card>
+                </CardContent>
+                <CardActions style={{ justifyContent: 'flex-end' }}>
+                    <Button size="small">Learn More</Button>
+                </CardActions>
+            </Card>
 
-        <Card style={{ boxShadow: 'none' }}>
-            <CardContent>
-                <TextField source="id" />
-                <Typography variant="title" component="h2">
-                    Analytics
+            <Card style={{ boxShadow: 'none' }}>
+                <CardContent>
+                    <TextField source="id" />
+                    <Typography variant="title" component="h2">
+                        Analytics
                 </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                    Analytcs are super. By default, Analytics are switched off
+                    <Typography className={classes.pos} color="textSecondary">
+                        Analytcs are super. By default, Analytics are switched off
                     and need to be switched on to start collecting data. The
                     exception to this rule is with Roku Cloud, where we collect
                     data to support the 'Disconnect on Play' feature. To swith
@@ -61,20 +63,20 @@ const HomeList = ({ props, classes, translate }) => (
                     needed and you will not lose the data you have already
                     collected.
                 </Typography>
-            </CardContent>
-            <CardActions style={{ justifyContent: 'flex-end' }}>
-                <Button size="small">Learn More</Button>
-            </CardActions>
-        </Card>
+                </CardContent>
+                <CardActions style={{ justifyContent: 'flex-end' }}>
+                    <Button size="small">Learn More</Button>
+                </CardActions>
+            </Card>
 
-        <Card style={{ boxShadow: 'none' }}>
-            <CardContent>
-                <TextField source="id" />
-                <Typography variant="title" component="h2">
-                    Content
+            <Card style={{ boxShadow: 'none' }}>
+                <CardContent>
+                    <TextField source="id" />
+                    <Typography variant="title" component="h2">
+                        Content
                 </Typography>
-                <Typography className={classes.pos} color="textSecondary">
-                    Content is grand. Geez, there's a lot of snow shovel, eh?
+                    <Typography className={classes.pos} color="textSecondary">
+                        Content is grand. Geez, there's a lot of snow shovel, eh?
                     Saskatchewan castle, Dauphin brewery, Royal Canadian
                     Institute for the Mentally Insane… hey, that’s the loony
                     bin, eh? I'm personally a big fan of Samantha Bee. They’re
@@ -85,12 +87,13 @@ const HomeList = ({ props, classes, translate }) => (
                     only go up in price. Anyone knows that. Even Gordon
                     Lightfoot knows that. Hoser Ipsum eh.
                 </Typography>
-            </CardContent>
-            <CardActions style={{ justifyContent: 'flex-end' }}>
-                <Button size="small">Learn More</Button>
-            </CardActions>
-        </Card>
-    </Grid>
+                </CardContent>
+                <CardActions style={{ justifyContent: 'flex-end' }}>
+                    <Button size="small">Learn More</Button>
+                </CardActions>
+            </Card>
+        </Grid>
+    </div>
 );
 
 const enhance = compose(

@@ -8,6 +8,7 @@ import MovieIcon from '@material-ui/icons/Movie';
 import AirplayIcon from '@material-ui/icons/Airplay';
 import QueryExecutor from '../../components/DataQuery/QueryExecutor';
 import * as Constants from '../../components/DataQuery/Queries'
+import { Title } from 'react-admin'; 
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -24,6 +25,7 @@ const HomeList = () => {
     const classes = useStyles();
     return (
         <div className={classes.root}>
+            <Title title="Dashboard" />
             <Grid container spacing={3}>
                 <Grid item xs>
                     <CardIcon Icon={AirplayIcon} bgColor="#db373e" />

@@ -8,7 +8,6 @@ import Logo from './Logo';
 
 const styles = {
     title: {
-        flex: 1,
         textOverflow: 'ellipsis',
         whiteSpace: 'nowrap',
         overflow: 'hidden',
