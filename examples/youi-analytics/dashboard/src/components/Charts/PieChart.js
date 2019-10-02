@@ -48,7 +48,7 @@ const PieChart = ({ resultSet }) => {
         }
     ]
     const legendMargin = { top: 10, right: 10, bottom: 150, left: 10 }
-    const labelMargin = { top: 30, right: 10, bottom: 10, left: 10 }
+    const labelMargin = { top: 35, right: 10, bottom: 35, left: 10 }
 
     // React Hook to measure DOM nodes to be able to hide/show chart labels in response to browser width
     const [chartRef, chartSize] = useDimensions()
