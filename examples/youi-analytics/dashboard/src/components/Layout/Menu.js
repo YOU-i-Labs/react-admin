@@ -11,6 +11,7 @@ import analytics from '../../routes/Analytics';
 import users from '../../routes/Users';
 import clickstream from '../../routes/Clickstream';
 import activity from '../../routes/Activity';
+import dashboard from '../../routes/Dashboard';
 import viewed from '../../routes/Viewed';
 import location from '../../routes/Location';
 
@@ -73,6 +74,12 @@ class Menu extends Component {
                     name="Analytics"
                     icon={<analytics.icon />}
                 >
+                    <MenuItemLink
+                        to={`/dashboard`}
+                        primaryText={'Dashboard'}
+                        leftIcon={<dashboard.icon />}
+                        onClick={onMenuClick}
+                    />
                     <MenuItemLink
                         to={`/activity`}
                         primaryText={'Activity'}

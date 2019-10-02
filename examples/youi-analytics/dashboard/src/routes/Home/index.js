@@ -1,7 +1,7 @@
-import Dashboard from '@material-ui/icons/Dashboard';
+import HomeIcon from '@material-ui/icons/Home';
 import HomeList from './HomeList';
 
 export default {
     list: HomeList,
-    icon: Dashboard,
+    icon: HomeIcon,
 };

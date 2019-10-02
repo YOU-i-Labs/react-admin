@@ -16,6 +16,7 @@ import Home from '../../routes/Home';
 import Configure from '../../routes/Configure';
 import Clickstream from '../../routes/Clickstream';
 import Activity from '../../routes/Activity';
+import Dashboard from '../../routes/Dashboard';
 import Viewed from '../../routes/Viewed';
 import Location from '../../routes/Location';
 
@@ -46,6 +47,7 @@ const AdminManager = () => (
             <Resource name="Viewed" {...Viewed} />,
             <Resource name="Location" {...Location} />,
             <Resource name="Activity" {...Activity} />,
+            <Resource name="Dashboard" {...Dashboard} />,
 
             permissions ? <Resource name="tags" {...Tags} /> : null,
 
