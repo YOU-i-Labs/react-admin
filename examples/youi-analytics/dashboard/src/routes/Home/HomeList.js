@@ -29,10 +29,13 @@ const HomeList = ({ props, classes, translate }) => (
             <Card style={{ boxShadow: 'none' }}>
                 <CardContent>
                     <TextField source="id" />
-                    <Typography variant="title" component="h2">
+                    <Typography
+                        align="left"
+                        variant="title"
+                        component="h2">
                         Welcome
-                </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
+                    </Typography>
+                    <Typography align="left" variant="body2" className={classes.pos} color="textSecondary">
                         Welcome to the Administration Console. That's like Justin
                     Trudeau winning the Grey Cup. I'm personally a big fan of
                     Oscar Peterson eh. They’re the head coach and chief punk on
@@ -40,7 +43,7 @@ const HomeList = ({ props, classes, translate }) => (
                     good pal. I don't think I should be hanging around with you
                     and Norm MacDonald anymore. Watch your step and remember,
                     Bob and Doug MacKenzie. Take off eh.
-                </Typography>
+                    </Typography>
                 </CardContent>
                 <CardActions style={{ justifyContent: 'flex-end' }}>
                     <Button size="small">Learn More</Button>
@@ -50,10 +53,13 @@ const HomeList = ({ props, classes, translate }) => (
             <Card style={{ boxShadow: 'none' }}>
                 <CardContent>
                     <TextField source="id" />
-                    <Typography variant="title" component="h2">
+                    <Typography
+                        align="left"
+                        variant="title"
+                        component="h2">
                         Analytics
-                </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
+                    </Typography>
+                    <Typography align="left" variant="body2" className={classes.pos} color="textSecondary">
                         Analytcs are super. By default, Analytics are switched off
                     and need to be switched on to start collecting data. The
                     exception to this rule is with Roku Cloud, where we collect
@@ -62,7 +68,7 @@ const HomeList = ({ props, classes, translate }) => (
                     turn 'Analytics' on. You can turn Analytics off and on as
                     needed and you will not lose the data you have already
                     collected.
-                </Typography>
+                    </Typography>
                 </CardContent>
                 <CardActions style={{ justifyContent: 'flex-end' }}>
                     <Button size="small">Learn More</Button>
@@ -72,10 +78,10 @@ const HomeList = ({ props, classes, translate }) => (
             <Card style={{ boxShadow: 'none' }}>
                 <CardContent>
                     <TextField source="id" />
-                    <Typography variant="title" component="h2">
+                    <Typography align="left" variant="title" component="h2">
                         Content
-                </Typography>
-                    <Typography className={classes.pos} color="textSecondary">
+                    </Typography>
+                    <Typography align="left" variant="body2" className={classes.pos} color="textSecondary">
                         Content is grand. Geez, there's a lot of snow shovel, eh?
                     Saskatchewan castle, Dauphin brewery, Royal Canadian
                     Institute for the Mentally Insane… hey, that’s the loony
@@ -86,7 +92,7 @@ const HomeList = ({ props, classes, translate }) => (
                     it when people call you Nelly Furtado. In Canada, scarfs
                     only go up in price. Anyone knows that. Even Gordon
                     Lightfoot knows that. Hoser Ipsum eh.
-                </Typography>
+                    </Typography>
                 </CardContent>
                 <CardActions style={{ justifyContent: 'flex-end' }}>
                     <Button size="small">Learn More</Button>
