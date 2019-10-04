@@ -7,8 +7,6 @@ import dataProvider from '../Providers/Data/dataProvider';
 import i18nProvider from '../Providers/i18n/i18nProvider';
 import layout from '../Layout/Layout';
 import login from '../Layout/Login';
-import CustomRouteLayout from '../CustomLayout/customRouteLayout';
-import CustomRouteNoLayout from '../CustomLayout/customRouteNoLayout';
 import Analytics from '../../routes/Analytics';
 import Users from '../../routes/Users';
 import Tags from '../../routes/Tags';
@@ -19,6 +17,16 @@ import Activity from '../../routes/Activity';
 import Dashboard from '../../routes/Dashboard';
 import Viewed from '../../routes/Viewed';
 import Location from '../../routes/Location';
+import Amplify from 'aws-amplify';
+
+Amplify.configure({
+    Auth: {
+        mandatorySignId: true,
+        region: process.env.REGION,
+        userPoolId: process.env.USER_POOL_ID,
+        userPoolWebClientId: process.env.APP_CLIENT_ID,
+    },
+});
 
 const AdminManager = () => (
     <Admin
@@ -30,15 +38,6 @@ const AdminManager = () => (
         title="Administration"
         locale="en"
         customReducers={{ tree }}
-        customRoutes={[
-            <Route
-                exact
-                path="/custom"
-                component={CustomRouteNoLayout}
-                noLayout
-            />,
-            <Route exact path="/custom2" component={CustomRouteLayout} />,
-        ]}
     >
         {permissions => [
             <Resource name="Home" {...Home} />,
