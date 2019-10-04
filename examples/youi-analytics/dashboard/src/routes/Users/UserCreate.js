@@ -117,7 +117,11 @@ const validateName = [required(), minLength(2), maxLength(15)];
 const validateEmail = [required()];
 
 const PostCreate = withStyles(styles)(({ classes, ...props }) => (
-    <Create title={'Create User'} {...props}>
+    <Create
+        title={'Create User'}
+        align="left"
+        {...props}>
+            
         <SimpleForm toolbar={<CustomToolbar />}>
             <BooleanInput
                 label="Active Account"

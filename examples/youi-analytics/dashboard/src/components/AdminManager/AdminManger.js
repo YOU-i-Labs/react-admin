@@ -17,6 +17,7 @@ import Activity from '../../routes/Activity';
 import Dashboard from '../../routes/Dashboard';
 import Viewed from '../../routes/Viewed';
 import Location from '../../routes/Location';
+import Profile from '../../routes/Profile';
 import Amplify from 'aws-amplify';
 
 Amplify.configure({
@@ -38,9 +39,17 @@ const AdminManager = () => (
         title="Administration"
         locale="en"
         customReducers={{ tree }}
+        customRoutes={[
+            <Route
+                key="my-profile"
+                path="/my-profile"
+                component={Profile.edit}
+            />,
+        ]}
     >
         {permissions => [
             <Resource name="Home" {...Home} />,
+            <Resource name="Profile" />,
             <Resource name="Analytics" {...Analytics} />,
             <Resource name="ClickStream" {...Clickstream} />,
             <Resource name="Viewed" {...Viewed} />,

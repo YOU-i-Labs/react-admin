@@ -1,10 +1,8 @@
 import React from 'react';
 import { AppBar, UserMenu, MenuItemLink, translate } from 'react-admin';
 import Typography from '@material-ui/core/Typography';
-import SettingsIcon from '@material-ui/icons/Settings';
 import { withStyles } from '@material-ui/core/styles';
-
-import Logo from './Logo';
+import ProfileMenu from './ProfileMenu';
 
 const styles = {
     title: {
@@ -17,25 +15,14 @@ const styles = {
     },
 };
 
-const CustomUserMenu = translate(({ translate, ...props }) => (
-    <UserMenu {...props}>
-        <MenuItemLink
-            to="/configuration"
-            primaryText="Settings"
-            leftIcon={<SettingsIcon />}
-        />
-    </UserMenu>
-));
-
 const CustomAppBar = ({ classes, ...props }) => (
-    <AppBar {...props} userMenu={<CustomUserMenu />}>
+    <AppBar {...props} userMenu={<ProfileMenu />}>
         <Typography
-            variant="title"
+            
             color="inherit"
             className={classes.title}
             id="react-admin-title"
         />
-        <Logo />
         <span className={classes.spacer} />
     </AppBar>
 );

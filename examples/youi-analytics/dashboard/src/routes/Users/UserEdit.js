@@ -118,7 +118,11 @@ const validateName = [required(), minLength(2), maxLength(15)];
 const validateEmail = [required()];
 
 const UserEdit = withStyles(styles)(({ classes, ...props }) => (
-    <Edit title={<UserTitle />} {...props}>
+    <Edit 
+        title={<UserTitle />} 
+        align="left"
+        {...props}>
+            
         <SimpleForm toolbar={<CustomToolbar />}>
             <BooleanInput
                 label="Active Account"

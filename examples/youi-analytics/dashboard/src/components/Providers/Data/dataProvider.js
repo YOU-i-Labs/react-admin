@@ -1,34 +1,34 @@
 import jsonRestProvider from 'ra-data-fakerest';
+import { GET_ONE, UPDATE } from 'react-admin';
 import data from './data';
-import addUploadFeature from './addUploadFeature';
+//import { Auth } from 'aws-amplify';
 
-const dataProvider = jsonRestProvider(data, true);
-const uploadCapableDataProvider = addUploadFeature(dataProvider);
+const disableFakeFetchRequestsLogs = true;
 
-// Calls this after delayedDataProvider below.
-const sometimesFailsDataProvider = (type, resource, params) =>
-    new Promise((resolve, reject) => {
-        console.log('dataProvider: sometimesFailsDataProvider');
-        // add rejection by type or resource here for tests, e.g.
-        // if (type === 'DELETE' && resource === 'posts') {
-        //     return reject('deletion error');
-        // }
-        return resolve(uploadCapableDataProvider(type, resource, params));
-    });
+const handleUserProfile = dataProvider => (verb, resource, params) => {
+    // We know we only GET or UPDATE the profile as there is only one for the current user
+    // To showcase how we can do something completely different here, we'll store it in local storage
+    // You can replace this with a customized fetch call to your own API route too
+    if (resource === 'Profile') {
+        if (verb === GET_ONE) {
+            const storedProfile = localStorage.getItem('profile');
 
-// hits this first, then sometimesFailsDataProvider above
-const delayedDataProvider = (type, resource, params) =>
-    new Promise(resolve => {
-        setTimeout(
-            // type: GET_LIST
-            // params: filter: users
-            // params: pagination (page: 1 to perpage: 10)
-            // parms: sort: name ASC
-            // resource: "Users"
-            () => resolve(sometimesFailsDataProvider(type, resource, params)),
-            1000
-        );
-        console.log('dataProvider: delayedDataProvider');
-    });
+            if (storedProfile) {
+                return Promise.resolve({
+                    data: JSON.parse(storedProfile)
+                });
+            }
 
-export default delayedDataProvider;
+            return Promise.resolve({
+                data: { id: params.id, fname: 'Joe', lname: 'Dirt', email: 'jd@youi.tv' }
+            });
+        }
+    }
+
+    // Fallback to the dataProvider default handling
+    return dataProvider(verb, resource, params);
+};
+
+export default handleUserProfile(
+    jsonRestProvider(data, disableFakeFetchRequestsLogs)
+);
