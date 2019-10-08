@@ -1,8 +1,8 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Paper } from '@material-ui/core';
-import PieChart from '../../components/Charts/PieChart'
-import BarChart from '../../components/Charts/BarChart'
+import PieChart from '../../components/NivoCharts/PieChart'
+import BarChart from '../../components/NivoCharts/BarChart'
 import CardIcon from '../../components/MaterialUI/CardIcon';
 import MovieIcon from '@material-ui/icons/Movie';
 import AirplayIcon from '@material-ui/icons/Airplay';
