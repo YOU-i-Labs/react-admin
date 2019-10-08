@@ -8,6 +8,8 @@ import MovieIcon from '@material-ui/icons/Movie';
 import AirplayIcon from '@material-ui/icons/Airplay';
 import QueryExecutor from '../../components/DataQuery/QueryExecutor';
 import * as Constants from '../../components/DataQuery/Queries'
+import mockBarResultSet from '../../mocks/result-sets/bar';
+import mockPieResultSet from '../../mocks/result-sets/pie';
 import { Title } from 'react-admin'; 
 
 const useStyles = makeStyles(theme => ({
@@ -32,7 +34,8 @@ const HomeList = () => {
                     <Paper className={classes.paper}>
                         <div>
                             <h2>Device Activity</h2>
-                            <QueryExecutor queryString={Constants.queryDevice} chartType={PieChart} />
+                            <PieChart resultSet={mockPieResultSet}/>
+                            {/* <QueryExecutor queryString={Constants.queryDevice} chartType={PieChart} /> */}
                         </div>
                     </Paper>
                 </Grid>
@@ -41,7 +44,8 @@ const HomeList = () => {
                     <Paper className={classes.paper}>
                         <div>
                             <h2>Movie Viewership</h2>
-                            <QueryExecutor queryString={Constants.queryMovie} chartType={BarChart} />
+                            <BarChart resultSet={mockBarResultSet}/>
+                            {/* <QueryExecutor queryString={Constants.queryMovie} chartType={BarChart} /> */}
                         </div>
                     </Paper>
                 </Grid>
