@@ -31,3 +31,9 @@
     transform: rotate(360deg);
   }
 }
+
+/* TODO: create You.i TV theme with the following */
+header {
+  box-shadow: none !important;
+  background-image: linear-gradient(to right, #ec1c24, #d91c5c)
+}

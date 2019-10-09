@@ -1,26 +1,33 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Paper } from '@material-ui/core';
-import PieChart from '../../components/NivoCharts/PieChart'
-import BarChart from '../../components/NivoCharts/BarChart'
+import PieChart from '../../components/VictoryCharts/PieChart'
+import BarChart from '../../components/VictoryCharts/BarChart'
+
 import CardIcon from '../../components/MaterialUI/CardIcon';
 import MovieIcon from '@material-ui/icons/Movie';
 import AirplayIcon from '@material-ui/icons/Airplay';
 import QueryExecutor from '../../components/DataQuery/QueryExecutor';
 import * as Constants from '../../components/DataQuery/Queries'
-import mockBarResultSet from '../../mocks/result-sets/bar';
-import mockPieResultSet from '../../mocks/result-sets/pie';
+import mockRokuData from '../../mocks/data/roku-generic';
 import { Title } from 'react-admin'; 
 
+/* TODO: create You.i TV theme with the following */
 const useStyles = makeStyles(theme => ({
     root: {
         flexGrow: 1,
+        borderRadius: 0,
     },
     paper: {
-        padding: theme.spacing(2),
+        padding: '0px',
         textAlign: 'center',
-        color: theme.palette.text.secondary,
+        color: theme.palette.text.secondary
     },
+    chartHeading: {
+        padding: '16px',
+        color: 'white',
+        'background-image': 'linear-gradient(to right, #ec1c24, #d91c5c)'
+    }
 }));
 
 const HomeList = () => {
@@ -32,21 +39,17 @@ const HomeList = () => {
                 <Grid item xs>
                     <CardIcon Icon={AirplayIcon} bgColor="#db373e" />
                     <Paper className={classes.paper}>
-                        <div>
-                            <h2>Device Activity</h2>
-                            <PieChart resultSet={mockPieResultSet}/>
-                            {/* <QueryExecutor queryString={Constants.queryDevice} chartType={PieChart} /> */}
-                        </div>
+                        <div className={classes.chartHeading}>Device Activity</div>
+                        {/* <QueryExecutor queryString={Constants.queryDevice} chartType={PieChart} /> */}
+                        <PieChart mockData={mockRokuData}/>
                     </Paper>
                 </Grid>
                 <Grid item xs>
                     <CardIcon Icon={MovieIcon} bgColor="#db373e" />
                     <Paper className={classes.paper}>
-                        <div>
-                            <h2>Movie Viewership</h2>
-                            <BarChart resultSet={mockBarResultSet}/>
-                            {/* <QueryExecutor queryString={Constants.queryMovie} chartType={BarChart} /> */}
-                        </div>
+                        <div className={classes.chartHeading}>Movie Viewership</div>
+                        {/* <QueryExecutor queryString={Constants.queryMovie} chartType={BarChart} /> */}
+                        <BarChart mockData={mockRokuData}/>
                     </Paper>
                 </Grid>
             </Grid>

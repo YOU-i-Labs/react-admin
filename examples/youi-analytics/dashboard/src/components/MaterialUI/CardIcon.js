@@ -2,18 +2,16 @@ import React from 'react';
 import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core/styles';
 
+/* TODO: create You.i TV theme with the following */
 const styles = {
     card: {
         float: 'left',
-        margin: '-20px 20px 0 15px',
-        zIndex: 100,
-        borderRadius: 3,
+        backgroundColor: 'transparent !important',
+        boxShadow: 'none',
     },
     icon: {
         float: 'right',
-        width: 50,
-        height: 50,
-        padding: 10,
+        padding: 14,
         color: '#fff',
     },
 };
