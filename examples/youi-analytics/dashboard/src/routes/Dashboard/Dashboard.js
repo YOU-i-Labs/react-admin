@@ -11,8 +11,10 @@ import DevicesIcon from '@material-ui/icons/Devices';
 
 import QueryExecutor from '../../components/DataQuery/QueryExecutor';
 import * as Constants from '../../components/DataQuery/Queries'
-import mockRokuXY from '../../mocks/data/roku-xy';
+
 import mockRokuDimensional from '../../mocks/data/roku-dimensional';
+import mockMoviesDimensional from '../../mocks/data/movies-dimensional';
+
 import { Title } from 'react-admin'; 
 
 // for development purposes - easily switch between mock and real data
@@ -57,7 +59,7 @@ const HomeList = () => {
                     <Paper className={classes.paper}>
                         <div className={classes.chartHeading}>Movie Viewership</div>
                         { USE_MOCK ?
-                            <BarChart mockData={mockRokuDimensional}/> :
+                            <BarChart mockData={mockMoviesDimensional}/> :
                             <QueryExecutor queryString={Constants.queryMovie} chartType={BarChart} />
                         }
                     </Paper>

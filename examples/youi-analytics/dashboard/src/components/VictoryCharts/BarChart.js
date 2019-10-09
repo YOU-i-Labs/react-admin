@@ -3,8 +3,10 @@ import {
     VictoryAxis,
     VictoryBar,
     VictoryChart,
-    VictoryGroup
+    VictoryGroup,
+    VictoryLabel
 } from "victory";
+import numeral from 'numeral';
 import { makeStyles } from '@material-ui/core/styles';
 
 import {
@@ -32,20 +34,28 @@ const BarChart = (props) => {
 
     return (
         <div onClick={() => { setLastClicked() }}>
-            <VictoryChart domainPadding={7}>
+            <VictoryChart domainPadding={5} padding={{top: 30, bottom: 50, left: 150, right: 40}}>
                 <VictoryAxis
-                    fixLabelOverlap={true}
                     events={createEventHandlers("tickLabels", setLastClicked)}
+                    style={{
+                        tickLabels: {fontSize: 11}
+                    }}
                 />
                  <VictoryAxis
                     dependentAxis
-                    fixLabelOverlap={true}
+                    tickFormat={(t) => numeral(t).format('0.0 a')}
+                    label={"Total Views"}
+                    style={{
+                        axisLabel: {fontSize: 11},
+                        tickLabels: {fontSize: 11}
+                    }}
                 />
-                <VictoryGroup colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}>
-                <VictoryBar
-                    data={data}
-                    events={createEventHandlers(["data", "labels"], setLastClicked)}
-                    />
+                <VictoryGroup barRatio={0.1} colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}>
+                    <VictoryBar
+                        horizontal
+                        data={data}
+                        events={createEventHandlers(["data", "labels"], setLastClicked)}
+                        />
                 </VictoryGroup>
             </VictoryChart>
             <ChartInfoPane dataItem={getLastClickedDataItem(lastClicked, data)} />

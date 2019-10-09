@@ -12,6 +12,7 @@
     "@nivo/pie": "^0.59.1",
     "aws-amplify": "^1.1.40",
     "google-map-react": "^1.1.5",
+    "numeral": "^2.0.6",
     "ra-data-fakerest": "^2.6.0",
     "ra-language-french": "^2.9.3",
     "ra-tree-language-english": "^2.3.0",
