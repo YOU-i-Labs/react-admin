@@ -14,7 +14,16 @@ const ChartInfoPane = (props) => {
     const classes = useStyles();
 
     return(
-        <div className={classes.infoPane}>{hasData ? <div>{`x: ${data.x || ''}`}<br></br>{`y: ${data.y || ''}`}</div> : <div></div>}</div>
+        <div className={classes.infoPane}>
+            { hasData ?
+                <div>
+                    {`${data.dimensionTitle || 'x'}: ${data.x || ''}`}
+                    <br></br>
+                    {`${data.measureTitle || 'y'}: ${data.y || ''}`}
+                </div> :
+                <div></div>
+            }
+        </div>
     );
 }
 

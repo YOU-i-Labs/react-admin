@@ -9,11 +9,12 @@ import MovieIcon from '@material-ui/icons/Movie';
 import AirplayIcon from '@material-ui/icons/Airplay';
 import QueryExecutor from '../../components/DataQuery/QueryExecutor';
 import * as Constants from '../../components/DataQuery/Queries'
-import mockRokuData from '../../mocks/data/roku-generic';
+import mockRokuXY from '../../mocks/data/roku-xy';
+import mockRokuDimensional from '../../mocks/data/roku-dimensional';
 import { Title } from 'react-admin'; 
 
 // for development purposes - easily switch between mock and real data
-const USE_MOCK = false;
+const USE_MOCK = true;
 
 /* TODO: create You.i TV theme with the following */
 const useStyles = makeStyles(theme => ({
@@ -43,8 +44,8 @@ const HomeList = () => {
                     <CardIcon Icon={AirplayIcon} bgColor="#db373e" />
                     <Paper className={classes.paper}>
                         <div className={classes.chartHeading}>Device Activity</div>
-                        {USE_MOCK ?
-                            <PieChart mockData={mockRokuData}/> :
+                        { USE_MOCK ?
+                            <PieChart mockData={mockRokuDimensional}/> :
                             <QueryExecutor queryString={Constants.queryDevice} chartType={PieChart} />
                         }
                     </Paper>
@@ -53,8 +54,8 @@ const HomeList = () => {
                     <CardIcon Icon={MovieIcon} bgColor="#db373e" />
                     <Paper className={classes.paper}>
                         <div className={classes.chartHeading}>Movie Viewership</div>
-                        {USE_MOCK ?
-                            <BarChart mockData={mockRokuData}/> :
+                        { USE_MOCK ?
+                            <BarChart mockData={mockRokuDimensional}/> :
                             <QueryExecutor queryString={Constants.queryMovie} chartType={BarChart} />
                         }
                     </Paper>

@@ -13,11 +13,11 @@ const PieChart = (props) => {
 
     let data;
     if(props.resultSet) {
-        // using real data, transform
+        // using real data
         data = transformData(props.resultSet);
     } else {
-        // using mock data, use as-is
-        data = props.mockData;
+        // using mock data
+        data = transformMockData(props.mockData);
     }
 
     return (
@@ -33,7 +33,7 @@ const PieChart = (props) => {
                             target: "data",
                             eventHandlers: {
                                 onClick: (e, item) => {
-                                    setLastClicked({x: item.datum.x, y: item.datum.y});
+                                    setLastClicked(item.datum);
                                 },
                                 onMouseOver: () => {
                                     return [{
@@ -58,10 +58,24 @@ const transformData = (resultSet) => {
     const dimensionKey = resultSet.loadResponse.query.dimensions[0]
     const measureKey = resultSet.loadResponse.query.measures[0]
 
-    return resultSet.loadResponse.data.map(obj => {
+    return resultSet.loadResponse.data.map(dataItem => {
         return {
-            'x': obj[dimensionKey],
-            'y': parseInt(obj[measureKey])
+            'x': dataItem[dimensionKey],
+            'y': parseInt(dataItem[measureKey])
+        }
+    })
+}
+
+const transformMockData = (mockData) => {
+    const dimensionKey = mockData.dimensions[0]
+    const measureKey = mockData.measures[0]
+
+    return mockData.data.map(dataItem => {
+        return {
+            'dimensionTitle': dimensionKey,
+            'measureTitle': measureKey,
+            'x': dataItem[dimensionKey],
+            'y': parseInt(dataItem[measureKey])
         }
     })
 }
