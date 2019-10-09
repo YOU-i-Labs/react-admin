@@ -12,6 +12,9 @@ import * as Constants from '../../components/DataQuery/Queries'
 import mockRokuData from '../../mocks/data/roku-generic';
 import { Title } from 'react-admin'; 
 
+// for development purposes - easily switch between mock and real data
+const USE_MOCK = false;
+
 /* TODO: create You.i TV theme with the following */
 const useStyles = makeStyles(theme => ({
     root: {
@@ -40,16 +43,20 @@ const HomeList = () => {
                     <CardIcon Icon={AirplayIcon} bgColor="#db373e" />
                     <Paper className={classes.paper}>
                         <div className={classes.chartHeading}>Device Activity</div>
-                        {/* <QueryExecutor queryString={Constants.queryDevice} chartType={PieChart} /> */}
-                        <PieChart mockData={mockRokuData}/>
+                        {USE_MOCK ?
+                            <PieChart mockData={mockRokuData}/> :
+                            <QueryExecutor queryString={Constants.queryDevice} chartType={PieChart} />
+                        }
                     </Paper>
                 </Grid>
                 <Grid item xs>
                     <CardIcon Icon={MovieIcon} bgColor="#db373e" />
                     <Paper className={classes.paper}>
                         <div className={classes.chartHeading}>Movie Viewership</div>
-                        {/* <QueryExecutor queryString={Constants.queryMovie} chartType={BarChart} /> */}
-                        <BarChart mockData={mockRokuData}/>
+                        {USE_MOCK ?
+                            <BarChart mockData={mockRokuData}/> :
+                            <QueryExecutor queryString={Constants.queryMovie} chartType={BarChart} />
+                        }
                     </Paper>
                 </Grid>
             </Grid>
