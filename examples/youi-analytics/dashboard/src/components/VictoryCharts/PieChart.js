@@ -6,16 +6,10 @@ import {
 } from "victory";
 import { makeStyles } from '@material-ui/core/styles';
 
-/* TODO: create You.i TV theme with the following */
-const useStyles = makeStyles(() => ({
-    infoPane: {
-        height: '200px'
-    }
-}));
+import ChartInfoPane from './ChartInfoPane';
 
 const PieChart = (props) => {
-    const [lastClicked, setLastClicked] = React.useState({});
-    const classes = useStyles();
+    const [lastClicked, setLastClicked] = React.useState();
 
     let data;
     if(props.resultSet) {
@@ -55,7 +49,7 @@ const PieChart = (props) => {
                         colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}
                 />}
             />
-            <div className={classes.infoPane}>{lastClicked.x}<br></br>{lastClicked.y}</div>
+            <ChartInfoPane data={lastClicked} />
         </div>
     )
 }
