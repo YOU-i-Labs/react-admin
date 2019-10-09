@@ -1,12 +1,14 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Paper } from '@material-ui/core';
+
 import PieChart from '../../components/VictoryCharts/PieChart'
 import BarChart from '../../components/VictoryCharts/BarChart'
 
 import CardIcon from '../../components/MaterialUI/CardIcon';
 import MovieIcon from '@material-ui/icons/Movie';
-import AirplayIcon from '@material-ui/icons/Airplay';
+import DevicesIcon from '@material-ui/icons/Devices';
+
 import QueryExecutor from '../../components/DataQuery/QueryExecutor';
 import * as Constants from '../../components/DataQuery/Queries'
 import mockRokuXY from '../../mocks/data/roku-xy';
@@ -41,7 +43,7 @@ const HomeList = () => {
             <Title title="Dashboard" />
             <Grid container spacing={3}>
                 <Grid item xs>
-                    <CardIcon Icon={AirplayIcon} bgColor="#db373e" />
+                    <CardIcon Icon={DevicesIcon} bgColor="#db373e" />
                     <Paper className={classes.paper}>
                         <div className={classes.chartHeading}>Device Activity</div>
                         { USE_MOCK ?

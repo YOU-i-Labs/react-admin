@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 /* TODO: create You.i TV theme with the following */
 const useStyles = makeStyles(() => ({
     infoPane: {
-        height: '200px'
+        height: '50px'
     }
 }));
 
