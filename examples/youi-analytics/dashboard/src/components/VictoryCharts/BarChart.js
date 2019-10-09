@@ -7,6 +7,13 @@ import {
 } from "victory";
 import { makeStyles } from '@material-ui/core/styles';
 
+import {
+    transformData,
+    transformMockData,
+    createEventHandlers,
+    getLastClickedDataItem
+} from './ChartUtils';
+
 import ChartInfoPane from './ChartInfoPane';
 
 const BarChart = (props) => {
@@ -21,11 +28,14 @@ const BarChart = (props) => {
         data = transformMockData(props.mockData);
     }
 
+    
+
     return (
-        <div>
+        <div onClick={() => { setLastClicked() }}>
             <VictoryChart domainPadding={7}>
                 <VictoryAxis
                     fixLabelOverlap={true}
+                    events={createEventHandlers("tickLabels", setLastClicked)}
                 />
                  <VictoryAxis
                     dependentAxis
@@ -34,54 +44,13 @@ const BarChart = (props) => {
                 <VictoryGroup colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}>
                 <VictoryBar
                     data={data}
-                    events={[{
-                        target: "data",
-                        eventHandlers: {
-                            onClick: (e, item) => {
-                                setLastClicked(item.datum);
-                            },
-                            onMouseOver: () => {
-                                return [{
-                                    target: "data",
-                                    mutation: ({style}) => {
-                                        return { style: Object.assign({ cursor: 'pointer'}, style) };
-                                    }
-                                }];
-                            }
-                        }
-                    }]}
+                    events={createEventHandlers(["data", "labels"], setLastClicked)}
                     />
                 </VictoryGroup>
             </VictoryChart>
-            <ChartInfoPane data={lastClicked} />
+            <ChartInfoPane dataItem={getLastClickedDataItem(lastClicked, data)} />
         </div>
     )
-}
-
-const transformData = (resultSet) => {
-    const dimensionKey = resultSet.loadResponse.query.dimensions[0]
-    const measureKey = resultSet.loadResponse.query.measures[0]
-
-    return resultSet.loadResponse.data.map(obj => {
-        return {
-            'x': obj[dimensionKey],
-            'y': parseInt(obj[measureKey])
-        }
-    })
-}
-
-const transformMockData = (mockData) => {
-    const dimensionKey = mockData.dimensions[0]
-    const measureKey = mockData.measures[0]
-
-    return mockData.data.map(dataItem => {
-        return {
-            'dimensionTitle': dimensionKey,
-            'measureTitle': measureKey,
-            'x': dataItem[dimensionKey],
-            'y': parseInt(dataItem[measureKey])
-        }
-    })
 }
 
 export default BarChart
