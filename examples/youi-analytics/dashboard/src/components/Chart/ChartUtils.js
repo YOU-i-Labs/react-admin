@@ -35,29 +35,104 @@ export const getLastClickedDataItem = (lastClicked, data) => {
     return dataItem;
 }
 
-export const createEventHandlers = (targets, onClickCallback) => {
-    // convert targets to array if necessary
-    const targetNames = Array.isArray(targets) ? targets : [ targets ];
+const addPointer = ({style}) => {
+    return { style: Object.assign({ cursor: 'pointer'}, style) };
+};
 
-    return targetNames.map((targetName) => {
-        return {
-            target: targetName,
-            eventHandlers: {
-                onClick: (e, item) => {
-                    onClickCallback(item.datum);
-                    e.stopPropagation();
-                },
-                onMouseOver: () => {
-                    const addPointer = ({style}) => {
-                        return { style: Object.assign({ cursor: 'pointer'}, style) };
-                    };
-
-                    return [{
-                        target: targetName,
-                        mutation: addPointer
-                      }];
-                }
+export const createBarEventHandlers = (onClickCallback) => {
+    return [{
+        target: "data",
+        eventHandlers: {
+            onClick: (e, item) => {
+                onClickCallback(item.datum);
+                e.stopPropagation();
+            },
+            onMouseOver: () => {
+                return [{
+                    target: "data",
+                    mutation: addPointer
+                }, {
+                    target: "labels",
+                    mutation: () => ({ active: true })
+                }];
+            },
+            onMouseOut: () => {
+                return [{
+                    target: "labels",
+                    mutation: () => ({ active: false })
+                }];
             }
         }
-    });
+    }]
+};
+
+export const createBarAxisEventHandlers = (onClickCallback) => {
+    return [{
+        target: "tickLabels",
+        eventHandlers: {
+            onClick: (e, item) => {
+                onClickCallback(item.datum);
+                e.stopPropagation();
+            },
+            onMouseOver: () => {
+                return [{
+                    target: "tickLabels",
+                    mutation: addPointer
+                }];
+            }
+        }
+    }];
+}
+
+export const createPieEventHandlers = (onClickCallback) => {
+    return [{
+        target: "data",
+        eventHandlers: {
+            onClick: (e, item) => {
+                onClickCallback(item.datum);
+                e.stopPropagation();
+            },
+            onMouseOver: (e, item) => {
+                // console.log(e);
+                // console.log(item);
+                return [{
+                    target: "data",
+                    mutation:  ({style}) => {
+                        return { style: Object.assign({
+                            cursor: 'pointer',
+                            stroke: 'red',
+                            strokeWidth: '6'
+                        }, style) };
+                    }
+                }, {
+                    target: "labels",
+                    mutation: () => ({ active: true })
+                }];
+            },
+            onMouseOut: () => {
+                return [{
+                    target: "labels",
+                    mutation: () => ({ active: false })
+                }];
+            }
+        }
+    }, {
+        target: "labels",
+        eventHandlers: {
+            onClick: (e, item) => {
+                onClickCallback(item.datum);
+                e.stopPropagation();
+            },
+            onMouseOver: () => {
+                const mutation = ({style}) => {
+                    return { style: Object.assign({ cursor: 'pointer'}, style) };
+                };
+
+                return [{
+                    target: "labels",
+                    mutation
+                }];
+            }
+        }
+    }]
 }

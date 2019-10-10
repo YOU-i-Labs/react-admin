@@ -4,7 +4,7 @@ import {
     VictoryBar,
     VictoryChart,
     VictoryGroup,
-    VictoryLabel
+    VictoryTooltip
 } from "victory";
 import numeral from 'numeral';
 import { makeStyles } from '@material-ui/core/styles';
@@ -12,8 +12,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import {
     transformData,
     transformMockData,
-    createEventHandlers,
-    getLastClickedDataItem
+    getLastClickedDataItem,
+    createBarEventHandlers,
+    createBarAxisEventHandlers
 } from '../Chart/ChartUtils';
 
 import ChartInfoPane from '../Chart/ChartInfoPane';
@@ -37,10 +38,13 @@ const BarChart = (props) => {
 
     return (
         <div onClick={() => { setLastClicked() }}>
-            <VictoryChart domainPadding={5} padding={{top: 30, bottom: 50, left: 150, right: 40}}>
+            <VictoryChart
+                domainPadding={5}
+                padding={{top: 30, bottom: 50, left: 150, right: 40}}
+            >
                 <VictoryAxis
                     invertAxis
-                    events={createEventHandlers("tickLabels", setLastClicked)}
+                    events={createBarAxisEventHandlers(setLastClicked)}
                     style={{
                         tickLabels: {fontSize: 11}
                     }}
@@ -59,7 +63,16 @@ const BarChart = (props) => {
                     <VictoryBar
                         horizontal
                         data={data}
-                        events={createEventHandlers(["data", "labels"], setLastClicked)}
+                        labels={({ datum }) => numeral(datum.y).format('0.0 a')}
+                        labelComponent={
+                            <VictoryTooltip
+                                dx={-2}
+                                pointerLength={0}
+                                style={{ fontSize: 12 }}
+                                flyoutStyle={{ fill: 'transparent', stroke: 0 }}
+                            />
+                        }
+                        events={createBarEventHandlers(setLastClicked)}
                         animate={animate ? { duration: 100 } : false}
                         />
                 </VictoryGroup>

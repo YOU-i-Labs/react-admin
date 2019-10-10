@@ -2,7 +2,8 @@ import React from "react"
 import {
     VictoryChart,
     VictoryPie,
-    Slice
+    Slice,
+    VictoryLabel
 } from "victory";
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -11,9 +12,18 @@ import ChartInfoPane from '../Chart/ChartInfoPane';
 import {
     transformData,
     transformMockData,
-    createEventHandlers,
-    getLastClickedDataItem
+    createPieEventHandlers
 } from '../Chart/ChartUtils';
+
+class CustomLabel extends React.Component {
+    render() {
+        return (
+            <g>
+                <VictoryLabel {...this.props}/>
+            </g>
+        );
+    }
+  }
 
 const PieChart = (props) => {
     const [lastClicked, setLastClicked] = React.useState();
@@ -36,9 +46,9 @@ const PieChart = (props) => {
                             <Slice/>
                         }
                         data={data}
-                        events={createEventHandlers(["data", "labels"], setLastClicked)}
-
+                        events={createPieEventHandlers(setLastClicked)}
                         colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}
+                        labelComponent={<CustomLabel {...props}/>}
                 />}
             />
             <ChartInfoPane dataItem={lastClicked} />
