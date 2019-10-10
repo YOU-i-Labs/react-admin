@@ -61,5 +61,3 @@ export const createEventHandlers = (targets, onClickCallback) => {
         }
     });
 }
-
-// export default [transformData, transformMockData, createEventHandlers]

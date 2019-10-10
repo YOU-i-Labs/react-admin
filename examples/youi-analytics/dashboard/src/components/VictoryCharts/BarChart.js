@@ -14,9 +14,9 @@ import {
     transformMockData,
     createEventHandlers,
     getLastClickedDataItem
-} from './ChartUtils';
+} from '../Chart/ChartUtils';
 
-import ChartInfoPane from './ChartInfoPane';
+import ChartInfoPane from '../Chart/ChartInfoPane';
 
 const BarChart = (props) => {
     const [lastClicked, setLastClicked] = React.useState();

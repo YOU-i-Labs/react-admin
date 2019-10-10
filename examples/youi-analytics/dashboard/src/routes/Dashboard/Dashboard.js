@@ -5,7 +5,7 @@ import { Grid, Paper } from '@material-ui/core';
 import PieChart from '../../components/VictoryCharts/PieChart'
 import BarChart from '../../components/VictoryCharts/BarChart'
 
-import CardIcon from '../../components/MaterialUI/CardIcon';
+import FilterListIcon from '@material-ui/icons/FilterListTwoTone';
 import MovieIcon from '@material-ui/icons/Movie';
 import DevicesIcon from '@material-ui/icons/Devices';
 
@@ -16,6 +16,8 @@ import mockRokuDimensional from '../../mocks/data/roku-dimensional';
 import mockMoviesDimensional from '../../mocks/data/movies-dimensional';
 
 import { Title } from 'react-admin'; 
+import ChartHeader from '../../components/Chart/ChartHeader';
+import DateRangePicker from '../../components/MaterialUI/DateRangePicker';
 
 // for development purposes - easily switch between mock and real data
 const USE_MOCK = true;
@@ -30,11 +32,6 @@ const useStyles = makeStyles(theme => ({
         padding: '0px',
         textAlign: 'center',
         color: theme.palette.text.secondary
-    },
-    chartHeading: {
-        padding: '16px',
-        color: 'white',
-        'background-image': 'linear-gradient(to right, #ec1c24, #d91c5c)'
     }
 }));
 
@@ -45,9 +42,23 @@ const HomeList = () => {
             <Title title="Dashboard" />
             <Grid container spacing={3}>
                 <Grid item xs>
-                    <CardIcon Icon={DevicesIcon} bgColor="#db373e" />
                     <Paper className={classes.paper}>
-                        <div className={classes.chartHeading}>Device Activity</div>
+                        <ChartHeader
+                            lightTheme
+                            filterBar
+                            title={"Filters"}
+                            children={<DateRangePicker />}
+                            iconComponent={FilterListIcon}/>
+                    </Paper>
+                </Grid>
+            </Grid>
+            <Grid container spacing={3}>
+                <Grid item xs>
+                    <Paper className={classes.paper}>
+                        <ChartHeader
+                            title={"Device Activity"}
+                            iconComponent={DevicesIcon}
+                        />
                         { USE_MOCK ?
                             <PieChart mockData={mockRokuDimensional}/> :
                             <QueryExecutor queryString={Constants.queryDevice} chartType={PieChart} />
@@ -55,9 +66,10 @@ const HomeList = () => {
                     </Paper>
                 </Grid>
                 <Grid item xs>
-                    <CardIcon Icon={MovieIcon} bgColor="#db373e" />
                     <Paper className={classes.paper}>
-                        <div className={classes.chartHeading}>Movie Viewership</div>
+                        <ChartHeader
+                            title={"Movie Viewership"}
+                            iconComponent={MovieIcon}/>
                         { USE_MOCK ?
                             <BarChart mockData={mockMoviesDimensional}/> :
                             <QueryExecutor queryString={Constants.queryMovie} chartType={BarChart} />

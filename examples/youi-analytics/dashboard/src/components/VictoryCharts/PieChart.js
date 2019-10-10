@@ -6,14 +6,14 @@ import {
 } from "victory";
 import { makeStyles } from '@material-ui/core/styles';
 
-import ChartInfoPane from './ChartInfoPane';
+import ChartInfoPane from '../Chart/ChartInfoPane';
 
 import {
     transformData,
     transformMockData,
     createEventHandlers,
     getLastClickedDataItem
-} from './ChartUtils';
+} from '../Chart/ChartUtils';
 
 const PieChart = (props) => {
     const [lastClicked, setLastClicked] = React.useState();
