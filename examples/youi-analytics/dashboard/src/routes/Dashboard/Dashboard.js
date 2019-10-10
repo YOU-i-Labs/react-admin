@@ -1,6 +1,9 @@
 import React from 'react';
+
+import { Title } from 'react-admin'; 
+
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Paper } from '@material-ui/core';
+import { Grid, Paper, Chip } from '@material-ui/core';
 
 import PieChart from '../../components/VictoryCharts/PieChart'
 import BarChart from '../../components/VictoryCharts/BarChart'
@@ -15,10 +18,10 @@ import * as Constants from '../../components/DataQuery/Queries'
 import mockRokuDimensional from '../../mocks/data/roku-dimensional';
 import mockMoviesDimensional from '../../mocks/data/movies-dimensional';
 
-import { Title } from 'react-admin'; 
 import ChartHeader from '../../components/Chart/ChartHeader';
-import DateRangePicker from '../../components/MaterialUI/DateRangePicker';
 import TopN from '../../components/MaterialUI/TopN'
+import CardIcon from '../../components/MaterialUI/CardIcon';
+import DateRangePicker from '../../components/MaterialUI/DateRangePicker';
 
 // for development purposes - easily switch between mock and real data
 const USE_MOCK = true;
@@ -33,6 +36,31 @@ const useStyles = makeStyles(theme => ({
         padding: '0px',
         textAlign: 'center',
         color: theme.palette.text.secondary
+    },
+    chartHeader: {
+        display: 'flex',
+        'justify-content': 'space-between'
+    },
+    title: {
+        'align-self': 'center',
+        'margin-right': '16px'
+    },
+    youiTheme: {
+        'background-image': 'linear-gradient(to right, #ec1c24, #d91c5c)',
+        color: 'white',
+    },
+    lightTheme: {
+        color: 'black'
+    },
+    filterBar: {
+        padding: '8px 0px'
+    },
+    chip: {
+        'align-self': 'center',
+        'margin': '0px 8px'
+    },
+    filterGroup: {
+        display: 'flex',
     }
 }));
 
@@ -46,19 +74,30 @@ const HomeList = () => {
     const numMovies = mockMoviesDimensional.data.length;
 
     const [ movieCount, changeMovieCount ] = React.useState(INITIAL_MOVIE_COUNT);
+    const [ selectedItem, changeSelectedItem ] = React.useState();
+
+    const handleSelectItem = (item) => {
+        changeSelectedItem(item);
+    };
+
+    const handleDeleteFilterSelection = () => {
+        changeSelectedItem();
+    }
 
     return (
         <div className={classes.root}>
-            <Title title="Dashboard" />
+            <Title title={`Dashboard`} />
             <Grid container spacing={3}>
                 <Grid item xs>
                     <Paper className={classes.paper}>
-                        <ChartHeader
-                            lightTheme
-                            filterBar
-                            title={"Filters"}
-                            children={<DateRangePicker />}
-                            iconComponent={FilterListIcon}/>
+                        <div className={`${classes.chartHeader} lightTheme ${classes.filterBar}`}>
+                            <div className={classes.filterGroup}>
+                                <CardIcon Icon={FilterListIcon} />
+                                <div className={classes.title}>{"Filter"}</div>
+                                {selectedItem ? <Chip onDelete={handleDeleteFilterSelection} label={selectedItem.x} className={classes.chip}/> : null}
+                            </div>
+                            <DateRangePicker />
+                        </div>
                     </Paper>
                 </Grid>
             </Grid>
@@ -66,11 +105,11 @@ const HomeList = () => {
                 <Grid item xs>
                     <Paper className={classes.paper}>
                         <ChartHeader
-                            title={"Device Activity"}
+                            title={`Device Activity${ selectedItem && selectedItem.chartId != "pie-devices"? ` for ${selectedItem.x}` : ''}`}
                             iconComponent={DevicesIcon}
                         />
                         { USE_MOCK ?
-                            <PieChart animate mockData={mockRokuDimensional}/> :
+                            <PieChart animate chartId={"pie-devices"} mockData={mockRokuDimensional} onSelectItem={handleSelectItem}/> :
                             <QueryExecutor queryString={Constants.queryDevice} chartType={PieChart} />
                         }
                     </Paper>
@@ -78,7 +117,7 @@ const HomeList = () => {
                 <Grid item xs>
                     <Paper className={classes.paper}>
                         <ChartHeader
-                            title={"Top Movies"}
+                            title={`Top Movies${ selectedItem && selectedItem.chartId != "bar-movies"? ` for ${selectedItem.x}` : ''}`}
                             iconComponent={MovieIcon}
                             children={
                                 <TopN
@@ -90,7 +129,7 @@ const HomeList = () => {
                                 />
                             }/>
                         { USE_MOCK ?
-                            <BarChart animate mockData={mockMoviesDimensional} topN={movieCount} /> :
+                            <BarChart animate chartId={"bar-movies"} mockData={mockMoviesDimensional} topN={movieCount} onSelectItem={handleSelectItem}/> :
                             <QueryExecutor queryString={Constants.queryMovie} chartType={BarChart} />
                         }
                     </Paper>

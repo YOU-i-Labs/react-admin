@@ -14,11 +14,14 @@ const useStyles = makeStyles(() => ({
     datePicker: {
         width: 150,
         float: 'right',
-        padding: '0px 8px',
+        margin: '0px 8px',
         'justify-content': 'center'
     },
     text: {
         'align-self': 'center'
+    },
+    container: {
+        display: 'flex'
     }
 }));
 
@@ -28,36 +31,38 @@ const DateRangePicker = (props) => {
 
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <div className={classes.text}>Date</div>
-            <KeyboardDatePicker
-                autoOk
-                clearable
-                variant="dialog"
-                inputVariant="standard"
-                format="MM/dd/yyyy"
-                value={selectedDate}
-                InputAdornmentProps={{ position: "start" }}
-                onChange={date => {
-                    console.log(date)
-                    handleDateChange(date)
-                }}
-                className={classes.datePicker}
-                />
-            <div className={classes.text}>to</div>
-            <KeyboardDatePicker
-                autoOk
-                clearable
-                variant="dialog"
-                inputVariant="standard"
-                format="MM/dd/yyyy"
-                value={selectedDate}
-                InputAdornmentProps={{ position: "start" }}
-                onChange={date => {
-                    console.log(date)
-                    handleDateChange(date)
-                }}
-                className={classes.datePicker}
-                />
+            <div className={classes.container}>
+                <div className={classes.text}>Date</div>
+                <KeyboardDatePicker
+                    autoOk
+                    clearable
+                    variant="dialog"
+                    inputVariant="standard"
+                    format="MM/dd/yyyy"
+                    value={selectedDate}
+                    InputAdornmentProps={{ position: "start" }}
+                    onChange={date => {
+                        console.log(date)
+                        handleDateChange(date)
+                    }}
+                    className={classes.datePicker}
+                    />
+                <div className={classes.text}>to</div>
+                <KeyboardDatePicker
+                    autoOk
+                    clearable
+                    variant="dialog"
+                    inputVariant="standard"
+                    format="MM/dd/yyyy"
+                    value={selectedDate}
+                    InputAdornmentProps={{ position: "start" }}
+                    onChange={date => {
+                        console.log(date)
+                        handleDateChange(date)
+                    }}
+                    className={classes.datePicker}
+                    />
+                </div>
         </MuiPickersUtilsProvider>
     );
 };

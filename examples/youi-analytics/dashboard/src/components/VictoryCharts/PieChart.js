@@ -16,19 +16,26 @@ import {
 } from '../Chart/ChartUtils';
 
 const PieChart = (props) => {
+    const { resultSet, mockData, onSelectItem, chartId } = props;
     const [lastClicked, setLastClicked] = React.useState();
 
+    const handleDataClick = (item) => {
+        const selected = item ? Object.assign(item, { chartId }) : item;
+        onSelectItem(selected);
+        setLastClicked(selected);
+    }
+
     let data;
-    if(props.resultSet) {
+    if(resultSet) {
         // using real data
-        data = transformData(props.resultSet);
+        data = transformData(resultSet);
     } else {
         // using mock data
-        data = transformMockData(props.mockData);
+        data = transformMockData(mockData);
     }
 
     return (
-        <div onClick={() => { setLastClicked() }}>
+        <div onClick={() => { handleDataClick() }}>
             <VictoryChart
                 containerComponent={
                     <VictoryPie
@@ -36,7 +43,7 @@ const PieChart = (props) => {
                             <Slice/>
                         }
                         data={data}
-                        events={createPieEventHandlers(setLastClicked)}
+                        events={createPieEventHandlers(handleDataClick)}
                         colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}
                 />}
             />

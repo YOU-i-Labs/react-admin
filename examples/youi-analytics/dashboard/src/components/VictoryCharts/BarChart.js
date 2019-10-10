@@ -20,8 +20,15 @@ import {
 import ChartInfoPane from '../Chart/ChartInfoPane';
 
 const BarChart = (props) => {
-    const { resultSet, mockData, topN, animate } = props;
+    const { resultSet, mockData, topN, animate, chartId, onSelectItem } = props;
     const [lastClicked, setLastClicked] = React.useState();
+
+    const handleDataClick = (lastClicked) => {
+        const lastClickedItem = getLastClickedDataItem(lastClicked, data)
+        const selected = lastClickedItem ? Object.assign(lastClickedItem, { chartId }) : lastClickedItem;
+        onSelectItem(selected);
+        setLastClicked(selected);
+    }
 
     let data;
     if(resultSet) {
@@ -37,14 +44,14 @@ const BarChart = (props) => {
     }
 
     return (
-        <div onClick={() => { setLastClicked() }}>
+        <div onClick={() => { handleDataClick() }}>
             <VictoryChart
                 domainPadding={5}
                 padding={{top: 30, bottom: 50, left: 150, right: 40}}
             >
                 <VictoryAxis
                     invertAxis
-                    events={createBarAxisEventHandlers(setLastClicked)}
+                    events={createBarAxisEventHandlers(handleDataClick)}
                     style={{
                         tickLabels: {fontSize: 11}
                     }}
@@ -72,12 +79,12 @@ const BarChart = (props) => {
                                 flyoutStyle={{ fill: 'transparent', stroke: 0 }}
                             />
                         }
-                        events={createBarEventHandlers(setLastClicked)}
+                        events={createBarEventHandlers(handleDataClick)}
                         animate={animate ? { duration: 100 } : false}
                         />
                 </VictoryGroup>
             </VictoryChart>
-            <ChartInfoPane dataItem={getLastClickedDataItem(lastClicked, data)} />
+            <ChartInfoPane dataItem={lastClicked} />
         </div>
     )
 }
