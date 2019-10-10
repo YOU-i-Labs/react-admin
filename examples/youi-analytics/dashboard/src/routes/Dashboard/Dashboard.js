@@ -18,6 +18,7 @@ import mockMoviesDimensional from '../../mocks/data/movies-dimensional';
 import { Title } from 'react-admin'; 
 import ChartHeader from '../../components/Chart/ChartHeader';
 import DateRangePicker from '../../components/MaterialUI/DateRangePicker';
+import TopN from '../../components/MaterialUI/TopN'
 
 // for development purposes - easily switch between mock and real data
 const USE_MOCK = true;
@@ -35,8 +36,17 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
+
 const HomeList = () => {
     const classes = useStyles();
+
+    const INITIAL_MOVIE_COUNT = 10;
+    const MIN_MOVIE_COUNT = 1;
+    const MAX_MOVIE_COUNT = 20;
+    const numMovies = mockMoviesDimensional.data.length;
+
+    const [ movieCount, changeMovieCount ] = React.useState(INITIAL_MOVIE_COUNT);
+
     return (
         <div className={classes.root}>
             <Title title="Dashboard" />
@@ -60,7 +70,7 @@ const HomeList = () => {
                             iconComponent={DevicesIcon}
                         />
                         { USE_MOCK ?
-                            <PieChart mockData={mockRokuDimensional}/> :
+                            <PieChart animate mockData={mockRokuDimensional}/> :
                             <QueryExecutor queryString={Constants.queryDevice} chartType={PieChart} />
                         }
                     </Paper>
@@ -68,10 +78,19 @@ const HomeList = () => {
                 <Grid item xs>
                     <Paper className={classes.paper}>
                         <ChartHeader
-                            title={"Movie Viewership"}
-                            iconComponent={MovieIcon}/>
+                            title={"Top Movies"}
+                            iconComponent={MovieIcon}
+                            children={
+                                <TopN
+                                    lightTheme
+                                    onSelectTopN={changeMovieCount}
+                                    defaultValue={INITIAL_MOVIE_COUNT}
+                                    min={MIN_MOVIE_COUNT}
+                                    max={MAX_MOVIE_COUNT > numMovies ? numMovies : MAX_MOVIE_COUNT}
+                                />
+                            }/>
                         { USE_MOCK ?
-                            <BarChart mockData={mockMoviesDimensional}/> :
+                            <BarChart animate mockData={mockMoviesDimensional} topN={movieCount} /> :
                             <QueryExecutor queryString={Constants.queryMovie} chartType={BarChart} />
                         }
                     </Paper>

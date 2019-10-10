@@ -19,27 +19,32 @@ import {
 import ChartInfoPane from '../Chart/ChartInfoPane';
 
 const BarChart = (props) => {
+    const { resultSet, mockData, topN, animate } = props;
     const [lastClicked, setLastClicked] = React.useState();
 
     let data;
-    if(props.resultSet) {
+    if(resultSet) {
         // using real data
-        data = transformData(props.resultSet);
+        data = transformData(resultSet);
     } else {
         // using mock data
-        data = transformMockData(props.mockData);
+        data = transformMockData(mockData);
     }
 
-    
+    if(topN) {
+        data = data.slice(0, topN);
+    }
 
     return (
         <div onClick={() => { setLastClicked() }}>
             <VictoryChart domainPadding={5} padding={{top: 30, bottom: 50, left: 150, right: 40}}>
                 <VictoryAxis
+                    invertAxis
                     events={createEventHandlers("tickLabels", setLastClicked)}
                     style={{
                         tickLabels: {fontSize: 11}
                     }}
+                    animate={animate ? { duration: 750 } : false}
                 />
                  <VictoryAxis
                     dependentAxis
@@ -55,6 +60,7 @@ const BarChart = (props) => {
                         horizontal
                         data={data}
                         events={createEventHandlers(["data", "labels"], setLastClicked)}
+                        animate={animate ? { duration: 100 } : false}
                         />
                 </VictoryGroup>
             </VictoryChart>

@@ -41,3 +41,24 @@ header {
 [class*="chartHeader"][class*="lightTheme"] svg {
   color: black;
 }
+
+[class*="chartHeader"] [class*="topN"] input {
+  color: white;
+}
+
+[class*="chartHeader"] [class*="topN"] .MuiInput-underline:hover:not(.Mui-disabled):before {
+  border-bottom-color: white;
+}
+
+[class*="chartHeader"] [class*="topN"] .MuiInput-underline:before {
+  border-bottom-color: white;
+}
+
+[class*="chartHeader"] [class*="topN"] .MuiInput-underline:after {
+  border-bottom-color: white;
+}
+
+[class*="chartHeader"] [class*="topN"].MuiFormControl-marginNormal {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
