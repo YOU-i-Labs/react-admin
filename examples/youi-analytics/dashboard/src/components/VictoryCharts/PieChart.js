@@ -15,16 +15,6 @@ import {
     createPieEventHandlers
 } from '../Chart/ChartUtils';
 
-class CustomLabel extends React.Component {
-    render() {
-        return (
-            <g>
-                <VictoryLabel {...this.props}/>
-            </g>
-        );
-    }
-  }
-
 const PieChart = (props) => {
     const [lastClicked, setLastClicked] = React.useState();
 
@@ -48,7 +38,6 @@ const PieChart = (props) => {
                         data={data}
                         events={createPieEventHandlers(setLastClicked)}
                         colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}
-                        labelComponent={<CustomLabel {...props}/>}
                 />}
             />
             <ChartInfoPane dataItem={lastClicked} />
