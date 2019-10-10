@@ -1,35 +1,37 @@
 export const queryDevice = {
     "measures": [
-        "Sessions.count"
+        "Sessionrecords.count"
     ],
     "timeDimensions": [],
     "dimensions": [
-        "Sessions.manufacturemodel"
+        "Sessionrecords.clientdataManufacturemodel"
     ],
     "filters": [
         {
-            "dimension": "Sessions.manufacturemodel",
+            "dimension": "Sessionrecords.clientdataManufacturemodel",
             "operator": "set"
         }
     ]
 }
 
 export const queryMovie = {
-    measures: ['Sessions.count'],
-    timeDimensions: [],
-    dimensions: ['Sessions.title'],
-    filters: [
-        {
-            dimension: 'Sessions.title',
-            operator: 'set',
-        },
-        {
-            dimension: 'Sessions.eventtype',
-            operator: 'equals',
-            values: ['playStart'],
-        },
+    "measures": [
+        "Sessionrecords.count"
     ],
-    limit: 10,
+    "timeDimensions": [],
+    "dimensions": ["Sessionrecords.clientdataTitle"],
+    "filters": [
+        {
+            "dimension": "Sessionrecords.clientdataTitle",
+            "operator": "set",
+        },
+        // {
+        //     "dimension": "Sessionrecords.eventtype",
+        //     "operator": "equals",
+        //     "values": ["playStart"],
+        // },
+    ],
+    "limit": 10,
 };
 
 export const queryGeoLocation = {
@@ -63,4 +65,20 @@ export const queryGeoLocation = {
         }
     ],
     "measures": []
+}
+
+
+export const queryEnginesUsedByDay = {
+    "dimensions": [],
+    "timeDimensions": [
+        {
+            "dimension": "EnginesUsed.timestamp",
+            "granularity": "day",
+            "dateRange": "Last 30 days"
+        }
+    ],
+    "measures": [
+        "EnginesUsed.enginesUsedAvg"
+    ],
+    "filters": []
 }
