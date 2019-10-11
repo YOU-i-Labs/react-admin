@@ -16,7 +16,7 @@ import {
 } from '../Chart/ChartUtils';
 
 const PieChart = (props) => {
-    const { resultSet, mockData, onSelectItem, chartId } = props;
+    const { resultSet, mockData, onSelectItem, chartId, dimensionTitle, measureTitle } = props;
     const [lastClicked, setLastClicked] = React.useState();
 
     const handleDataClick = (item) => {
@@ -47,7 +47,7 @@ const PieChart = (props) => {
                         colorScale={["tomato", "orange", "gold", "cyan", "navy" ]}
                 />}
             />
-            <ChartInfoPane dataItem={lastClicked} />
+            <ChartInfoPane dataItem={lastClicked} dimensionTitle={dimensionTitle} measureTitle={measureTitle}/>
         </div>
     )
 }

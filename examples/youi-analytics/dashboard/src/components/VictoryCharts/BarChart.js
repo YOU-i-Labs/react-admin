@@ -20,7 +20,7 @@ import {
 import ChartInfoPane from '../Chart/ChartInfoPane';
 
 const BarChart = (props) => {
-    const { resultSet, mockData, topN, animate, chartId, onSelectItem } = props;
+    const { resultSet, mockData, topN, animate, chartId, onSelectItem, dimensionTitle, measureTitle } = props;
     const [lastClicked, setLastClicked] = React.useState();
 
     const handleDataClick = (lastClicked) => {
@@ -84,7 +84,7 @@ const BarChart = (props) => {
                         />
                 </VictoryGroup>
             </VictoryChart>
-            <ChartInfoPane dataItem={lastClicked} />
+            <ChartInfoPane dataItem={lastClicked} dimensionTitle={dimensionTitle} measureTitle={measureTitle} />
         </div>
     )
 }

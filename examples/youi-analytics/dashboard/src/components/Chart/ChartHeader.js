@@ -23,6 +23,9 @@ const useStyles = makeStyles((theme) => ({
     },
     filterBar: {
         padding: '8px 0px'
+    },
+    container: {
+        'margin-bottom': 'auto'
     }
 }));
 
@@ -32,7 +35,7 @@ const ChartHeader = (props) => {
     const themeClass = lightTheme ? classes.lightTheme : classes.youiTheme;
 
     return(
-        <div>
+        <div className={classes.container}>
             <div className={`${classes.chartHeader} ${themeClass} ${filterBar ? classes.filterBar : ''}`}>
                 <CardIcon Icon={iconComponent} />
                 <div className={classes.title}>{title}</div>

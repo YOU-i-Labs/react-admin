@@ -82,3 +82,41 @@ export const queryEnginesUsedByDay = {
     ],
     "filters": []
 }
+
+export const buildMovieQuery = (filter) => {
+    return {
+        "dimensions": [
+          "SessionMoviesDevices.title"
+        ],
+        "timeDimensions": [],
+        "filters": filter ? [{
+            "dimension": filter.dimension,
+            "operator": "contains",
+            "values": [
+              filter.value
+            ]
+        }] : [],
+        "measures": [
+          "SessionMoviesDevices.count"
+        ]
+      }
+};
+
+export const buildDeviceQuery = (filter) => {
+    return {
+        "dimensions": [
+          "SessionMoviesDevices.model"
+        ],
+        "timeDimensions": [],
+        "filters": filter ? [{
+            "dimension": filter.dimension,
+            "operator": "contains",
+            "values": [
+              filter.value
+            ]
+        }] : [],
+        "measures": [
+          "SessionMoviesDevices.count"
+        ]
+      }
+};

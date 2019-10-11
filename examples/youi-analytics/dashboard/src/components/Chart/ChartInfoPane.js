@@ -9,7 +9,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 const ChartInfoPane = (props) => {
-    const { dataItem } = props;
+    const { dataItem, dimensionTitle, measureTitle } = props;
     const hasDataItem = dataItem && Object.keys(props.dataItem);
     const classes = useStyles();
 
@@ -17,9 +17,9 @@ const ChartInfoPane = (props) => {
         <div className={classes.infoPane}>
             { hasDataItem ?
                 <div>
-                    {`${dataItem.dimensionTitle || 'x'}: ${dataItem.x || ''}`}
+                    {`${dataItem.dimensionTitle || dimensionTitle || 'x'}: ${dataItem.x || ''}`}
                     <br></br>
-                    {`${dataItem.measureTitle || 'y'}: ${dataItem.y || ''}`}
+                    {`${dataItem.measureTitle || measureTitle || 'y'}: ${dataItem.y || ''}`}
                 </div> :
                 <div></div>
             }
