@@ -26,7 +26,7 @@ export const transformMockData = (mockData) => {
 
 export const getLastClickedDataItem = (lastClicked, data) => {
     let dataItem;
-    if(lastClicked && !lastClicked.dimensionTitle && !lastClicked.measureTitle) {
+    if(lastClicked && !lastClicked.x && !lastClicked.y) {
         // handle case where lastClicked is an index - when user clicks axis
         dataItem = data[lastClicked - 1];
     } else {
