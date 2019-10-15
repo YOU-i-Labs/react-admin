@@ -1,7 +1,8 @@
 import React from "react"
 import { ResponsivePie } from '@nivo/pie'
 import useDimensions from "react-use-dimensions"
-import Dialog from '../../components/MaterialUI/Dialog'
+import Dialog from '../../MaterialUI/Dialog'
+
 
 
 const PieChart = ({ resultSet }) => {

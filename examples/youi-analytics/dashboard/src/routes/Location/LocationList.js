@@ -1,6 +1,6 @@
 import React from 'react';
 import QueryExecutor from '../../components/DataQuery/QueryExecutor';
-import HeatMap from "../../components/NivoCharts/HeatMap"
+import HeatMap from "../../components/Charts/GoogleMap/HeatMap"
 import * as Constants from '../../components/DataQuery/Queries'
 import { Title } from 'react-admin'; 
 

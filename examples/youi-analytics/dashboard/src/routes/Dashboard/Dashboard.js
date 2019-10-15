@@ -5,8 +5,8 @@ import { Title } from 'react-admin';
 import { makeStyles } from '@material-ui/core/styles';
 
 import BaseChart from '../../components/Chart/BaseChart';
-import PieChart from '../../components/VictoryCharts/PieChart'
-import BarChart from '../../components/VictoryCharts/BarChart'
+import PieChart from '../../components/Charts/VictoryCharts/PieChart'
+import BarChart from '../../components/Charts/VictoryCharts/BarChart'
 import FilterBar from '../../components/Chart/FilterBar';
 
 import MovieIcon from '@material-ui/icons/Movie';

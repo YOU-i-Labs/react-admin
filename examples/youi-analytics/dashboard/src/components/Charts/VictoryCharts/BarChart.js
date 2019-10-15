@@ -15,9 +15,9 @@ import {
     getLastClickedDataItem,
     createBarEventHandlers,
     createBarAxisEventHandlers
-} from '../Chart/ChartUtils';
+} from '../../Chart/ChartUtils';
 
-import ChartInfoPane from '../Chart/ChartInfoPane';
+import ChartInfoPane from '../../Chart/ChartInfoPane';
 
 const BarChart = (props) => {
     const { resultSet, mockData, topN, animate, chartId, onSelectItem, dimensionTitle, measureTitle } = props;

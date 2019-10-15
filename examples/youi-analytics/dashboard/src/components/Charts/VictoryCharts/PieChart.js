@@ -7,13 +7,13 @@ import {
 } from "victory";
 import { makeStyles } from '@material-ui/core/styles';
 
-import ChartInfoPane from '../Chart/ChartInfoPane';
+import ChartInfoPane from '../../Chart/ChartInfoPane';
 
 import {
     transformData,
     transformMockData,
     createPieEventHandlers
-} from '../Chart/ChartUtils';
+} from '../../Chart/ChartUtils';
 
 const PieChart = (props) => {
     const { resultSet, mockData, onSelectItem, chartId, dimensionTitle, measureTitle } = props;

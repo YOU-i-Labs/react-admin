@@ -1,7 +1,7 @@
 import React from 'react'
 import { ResponsiveChoropleth } from '@nivo/geo'
-import geoData from '../../mocks/data/geo-data';
-import countriesGeoJson from '../../mocks/data/countries'
+import geoData from '../../../mocks/data/geo-data';
+import countriesGeoJson from '../../../mocks/data/countries'
 
 const Choropleth = () => {
     // Render chart
