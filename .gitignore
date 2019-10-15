@@ -12,4 +12,6 @@ examples/**/static
 examples/**/dist
 cypress/videos
 cypress/screenshots
+.DS_Store
 .env
+package-lock.json

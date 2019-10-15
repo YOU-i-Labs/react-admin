@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { ResponsiveBar } from '@nivo/bar'
 import useDimensions from 'react-use-dimensions'
-import Dialog from '../../components/MaterialUI/Dialog'
+import Dialog from '../MaterialUI/Dialog'
 
 
 const BarChart = ({ resultSet }) => {

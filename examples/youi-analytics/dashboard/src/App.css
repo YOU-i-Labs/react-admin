@@ -31,3 +31,34 @@
     transform: rotate(360deg);
   }
 }
+
+/* TODO: create You.i TV theme with the following */
+header {
+  box-shadow: none !important;
+  background-image: linear-gradient(to right, #ec1c24, #d91c5c)
+}
+
+[class*="chartHeader"][class*="lightTheme"] svg {
+  color: black;
+}
+
+[class*="chartHeader"] [class*="topN"] input {
+  color: white;
+}
+
+[class*="chartHeader"] [class*="topN"] .MuiInput-underline:hover:not(.Mui-disabled):before {
+  border-bottom-color: white;
+}
+
+[class*="chartHeader"] [class*="topN"] .MuiInput-underline:before {
+  border-bottom-color: white;
+}
+
+[class*="chartHeader"] [class*="topN"] .MuiInput-underline:after {
+  border-bottom-color: white;
+}
+
+[class*="chartHeader"] [class*="topN"].MuiFormControl-marginNormal {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

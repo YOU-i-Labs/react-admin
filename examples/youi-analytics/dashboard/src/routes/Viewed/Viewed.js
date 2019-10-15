@@ -1,6 +1,6 @@
 import React from 'react';
 import QueryExecutor from '../../components/DataQuery/QueryExecutor';
-import BarChart from '../../components/Charts/BarChart'
+import BarChart from '../../components/NivoCharts/BarChart'
 import * as Constants from '../../components/DataQuery/Queries'
 import { Title } from 'react-admin';
 
