@@ -15,7 +15,7 @@ const useStyles = makeStyles({
 
 const AreaChart = (resultSet) => {
 
-    const [selection, setSelection] = React.useState('1W')
+    const [selection, setSelection] = React.useState('1M')
 
     const getDateRange = (days) => {
         let maxDate = new Date()
@@ -52,10 +52,16 @@ const AreaChart = (resultSet) => {
         },
         xaxis: {
             type: 'datetime',
-            min: getDateRange(7).min,
-            tickAmount: 6,
+            min: getDateRange(30).min,
+            crosshairs: {
+                show: false
+            },
+            tooltip: {
+                enabled: false
+            }
         },
         tooltip: {
+            theme: 'dark',
             x: {
                 format: 'dd MMM yyyy'
             }
@@ -88,6 +94,7 @@ const AreaChart = (resultSet) => {
     })
 
     const [series, setSeries] = React.useState([{
+        name: "User sessions",
         data: resultSet.resultSet.loadResponse.data.map(obj => {
             return [obj['EnginesUsed.timestamp'], parseInt(obj['EnginesUsed.enginesUsedAvg'])]
         })
@@ -101,9 +108,6 @@ const AreaChart = (resultSet) => {
 
         let xaxis = {};
         switch (timeline) {
-            case '1D':
-                xaxis = getDateRange(1)
-                break;
             case '1W':
                 xaxis = getDateRange(7)
                 break;
@@ -121,7 +125,7 @@ const AreaChart = (resultSet) => {
                 break;
             default:
         }
-        console.log(timeline)
+
         setOptions({
             xaxis: xaxis
         })
@@ -135,9 +139,6 @@ const AreaChart = (resultSet) => {
                     exclusive
                     onChange={updateData}
                 >
-                    <ToggleButton value="1D">
-                        1D
-                    </ToggleButton>
                     <ToggleButton value="1W">
                         1W
                     </ToggleButton>
