@@ -13,6 +13,7 @@ import clickstream from '../../routes/Clickstream';
 import activity from '../../routes/Activity';
 import dashboard from '../../routes/Dashboard';
 import viewed from '../../routes/Viewed';
+import usersessions from '../../routes/UserSessions';
 import location from '../../routes/Location';
 
 import SubMenu from './SubMenu';
@@ -102,6 +103,12 @@ class Menu extends Component {
                         to={`/viewed`}
                         primaryText={'Viewed'}
                         leftIcon={<viewed.icon />}
+                        onClick={onMenuClick}
+                    />
+                    <MenuItemLink
+                        to={`/usersessions`}
+                        primaryText={'User Sessions'}
+                        leftIcon={<usersessions.icon />}
                         onClick={onMenuClick}
                     />
                     <MenuItemLink

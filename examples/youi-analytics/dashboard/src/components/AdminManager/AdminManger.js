@@ -16,6 +16,7 @@ import Clickstream from '../../routes/Clickstream';
 import Activity from '../../routes/Activity';
 import Dashboard from '../../routes/Dashboard';
 import Viewed from '../../routes/Viewed';
+import UserSessions from '../../routes/UserSessions';
 import Location from '../../routes/Location';
 import Profile from '../../routes/Profile';
 import Amplify from 'aws-amplify';
@@ -53,6 +54,7 @@ const AdminManager = () => (
             <Resource name="Analytics" {...Analytics} />,
             <Resource name="ClickStream" {...Clickstream} />,
             <Resource name="Viewed" {...Viewed} />,
+            <Resource name="UserSessions" {...UserSessions} />,
             <Resource name="Location" {...Location} />,
             <Resource name="Activity" {...Activity} />,
             <Resource name="Dashboard" {...Dashboard} />,
